@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+    "dev:client": "next dev",
+    "dev:server": "cd backend && npm run develop",
+    "start": "next start",
+    "build": "next build"
   },
   "dependencies": {
     "@types/node": "^14.14.16",
@@ -13,6 +15,7 @@
     "@types/react-dom": "^17.0.0",
     "autoprefixer": "^10.1.0",
     "clsx": "^1.1.1",
+    "concurrently": "^5.3.0",
     "eslint": "^7.16.0",
     "keen-slider": "^5.3.5",
     "next": "10.0.4",
