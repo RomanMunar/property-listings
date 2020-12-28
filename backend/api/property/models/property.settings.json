@@ -1,0 +1,77 @@
+{
+  "kind": "collectionType",
+  "collectionName": "properties",
+  "info": {
+    "name": "property",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "price": {
+      "type": "biginteger"
+    },
+    "price_min": {
+      "type": "biginteger"
+    },
+    "price_max": {
+      "type": "biginteger"
+    },
+    "bedrooms_count": {
+      "type": "integer"
+    },
+    "bathrooms_count": {
+      "type": "integer"
+    },
+    "images": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "has_garden": {
+      "type": "boolean"
+    },
+    "pets_allowed": {
+      "type": "boolean"
+    },
+    "has_garage": {
+      "type": "boolean"
+    },
+    "garages_count": {
+      "type": "integer"
+    },
+    "lot_area": {
+      "type": "decimal"
+    },
+    "floor_area": {
+      "type": "decimal"
+    },
+    "owner_name": {
+      "type": "string"
+    },
+    "owner_email": {
+      "type": "string"
+    },
+    "owner_phone_number": {
+      "type": "string"
+    }
+  }
+}
