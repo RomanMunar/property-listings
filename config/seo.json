@@ -1,0 +1,19 @@
+{
+  "title": "John Hitchins",
+  "titleTemplate": "%s &ndash; &ndash; A Real Estate Broker, Investor, and Writer.",
+  "description": "Real State Broker - We provide an easy way for property owners to connect with owners seeking of a house for a good price",
+  "openGraph": {
+    "type": "website",
+    "locale": "en_IE",
+    "url": "https://realcommerce.vercel.app",
+    "site_name": "John Hitchkins Real Estate Broker",
+    "images": [
+      {
+        "url": "https://realcommerce.vercel.app/website-image.png",
+        "width": 1350,
+        "height": 678,
+        "alt": "Real Greens' Website Image"
+      }
+    ]
+  }
+}
