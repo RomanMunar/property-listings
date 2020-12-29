@@ -43,6 +43,50 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <div className="relative bg-gray-800">
+        <div
+          style={{ backgroundImage: 'url("/team-collab.jpg")' }}
+          className="w-full bg-center bg-no-repeat bg-cover h-44"
+        >
+          <div className="absolute top-0 w-full h-full bg-gray-700 bg-opacity-50"></div>
+        </div>
+        <div className="absolute z-10 px-10 top-1/4">
+          <h3 className="text-2xl font-semibold text-center text-amber-500">Unparalleled Service.</h3>
+          <br /> <p className="text-center text-gray-100">Expert advice at every step of the Transcation.</p>
+        </div>
+      </div>
+      <div className="relative bg-gray-800">
+        <div
+          style={{ backgroundImage: 'url("/neighborhoods.jpg")' }}
+          className="w-full h-64 bg-center bg-no-repeat bg-cover"
+        >
+          <div className="absolute top-0 w-full h-full bg-gray-700 bg-opacity-50"></div>
+        </div>
+        <div className="absolute z-10 px-10 top-12">
+          <h3 className="text-2xl font-semibold text-center text-amber-500">Explore Neighborhoods.</h3>
+          <br />
+          <p className="text-center text-gray-100">
+            Santa Barbara is world-renowned and showcases spectacular homes, a phenomenal climate, and a special
+            community of people.
+          </p>
+        </div>
+      </div>
+      <div className="relative bg-gray-800">
+        <div
+          style={{ backgroundImage: 'url("/conciergie.jpg")' }}
+          className="w-full h-64 bg-center bg-no-repeat bg-cover"
+        >
+          <div className="absolute top-0 w-full h-full bg-gray-700 bg-opacity-50"></div>
+        </div>
+        <div className="absolute z-10 px-10 top-1/4">
+          <h3 className="text-2xl font-semibold text-center text-amber-500">Visit Our Concierge Services.</h3>
+          <br />
+          <p className="text-center text-gray-100">
+            Purchasing a home in Santa Barbara doesn’t have to be a difficult process. Let our trusted partners help
+            guide you every step of the way.
+          </p>
+        </div>
+      </div>
     </div>
   )
 }
