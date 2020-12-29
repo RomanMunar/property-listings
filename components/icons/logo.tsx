@@ -1,6 +1,6 @@
 import React from "react"
 
-const Logo = ({ ...rest }) => {
+const logo = ({ ...rest }) => {
   return (
     <svg {...rest} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path
@@ -13,4 +13,4 @@ const Logo = ({ ...rest }) => {
   )
 }
 
-export default Logo
+export default logo
