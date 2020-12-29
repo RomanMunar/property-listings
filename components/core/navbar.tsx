@@ -3,7 +3,7 @@ import { Logo, Menu } from "../icons"
 
 interface Props {}
 
-const Navbar = (props: Props) => {
+const navbar = (props: Props) => {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false)
 
   return (
@@ -39,4 +39,4 @@ const Navbar = (props: Props) => {
   )
 }
 
-export default Navbar
+export default navbar

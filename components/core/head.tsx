@@ -3,7 +3,7 @@ import { DefaultSeo } from "next-seo"
 import config from "../../config/seo.json"
 import GoogleFonts from "next-google-fonts"
 
-const Head = () => {
+const head = () => {
   return (
     <>
       <DefaultSeo {...config} />
@@ -16,4 +16,4 @@ const Head = () => {
   )
 }
 
-export default Head
+export default head
