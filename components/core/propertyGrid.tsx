@@ -1,5 +1,4 @@
-import { disableBodyScroll } from "../../lib/utils/disableScroll"
-import { enableBodyScroll } from "../../lib/utils/enableScroll"
+import { disableScroll, enableScroll } from "../../lib/utils"
 import { useState, useEffect } from "react"
 import { PropertyCard } from "."
 import { Property } from "../../@types"
@@ -9,21 +8,28 @@ interface Props {
 }
 
 const propertyGrid = ({ properties }: Props) => {
-  const [selected, setSelected] = useState<Property>()
+  const [selected, setSelected] = useState<Property | null>(null)
   const [isOverlayOpen, setIsOverlayOpen] = useState(false)
+
   const onPropertyClick = (property: Property) => {
     setSelected(property)
-    disableBodyScroll()
+    setIsOverlayOpen(true)
+    disableScroll()
   }
-  useEffect(() => setSelected(properties[0]), [properties])
+  useEffect(() => {
+    setSelected(properties[0])
+    disableScroll()
+    setIsOverlayOpen(true)
+  }, [properties])
 
   return (
     <>
-      <div className="flex h-full py-20 bg-gray-800">
+      <div className="h-full py-20 bg-gray-800">
+        <h3 className="block max-w-6xl mx-auto mb-10 text-5xl font-semibold text-amber-500">Our Properties.</h3>
         <div className="flex w-full max-w-6xl mx-auto">
-          <div className="max-w-lg mx-auto overflow-auto border border-r-0 max-h-90vh">
+          <div className="max-w-lg mx-auto overflow-auto border-t border-l max-h-90vh">
             <div className="flex flex-col my-2">
-              <h3 className="mx-4 font-thin text-white">Search results for "Software & IT Jobs"</h3>
+              <h3 className="mx-4 font-thin text-white">Search results for "Properties near St. Peter"</h3>
               <div className="relative w-11/12 mx-auto mr-4">
                 <input
                   type="text"
@@ -37,9 +43,9 @@ const propertyGrid = ({ properties }: Props) => {
                   stroke="currentColor"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1"
                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                   />
                 </svg>
@@ -280,21 +286,33 @@ const propertyGrid = ({ properties }: Props) => {
       </div>
       {selected && (
         <>
-          <button
-            onClick={() => {
-              setIsOverlayOpen(false)
-              enableBodyScroll()
-            }}
-            className="fixed inset-0 z-40 w-full h-full bg-gray-500 bg-opacity-30 sm:block"
-          />
-          <nav className="fixed bottom-0 z-50 w-full h-1/2">
-            <ul className="flex flex-col items-center justify-around w-full h-full py-10 space-y-4 text-white bg-gray-700 rounded-tl-2xl rounded-tr-2xl top-1/2">
-              <li className="px-4 py-1 font-bold border-b-2 border-amber-500">Home</li>
-              <li>Listings</li>
-              <li className="px-4 py-1">Testimonials</li>
-              <li className="px-4 py-1">Contact</li>
-            </ul>
-          </nav>
+          {isOverlayOpen && (
+            <button
+              onClick={() => {
+                setIsOverlayOpen(false)
+                setSelected(null)
+                enableScroll()
+              }}
+              className="fixed bottom-0 z-40 w-full h-full bg-gray-500 bg-opacity-30 sm:block"
+            />
+          )}
+          <div className="fixed bottom-0 z-50 w-full overflow-scroll h-3/4">
+            <div className="px-4 py-2 bg-gray-800 rounded-tl-2xl rounded-tr-2xl">
+              <h3 className="mb-4 text-2xl font-bold text-amber-500">{selected.title}</h3>
+              <div className="p-4 space-y-5 text-gray-300 border rounded-lg">
+                <h3 className="text-xl font-bold">Property Description</h3>
+                <p className="text-sm">{selected.description} </p>
+              </div>
+              <div className="p-4 space-y-5 text-gray-300 border rounded-lg">
+                <h3 className="text-xl font-bold">Property Description</h3>
+                <p className="text-sm">{selected.description} </p>
+              </div>
+              <div className="p-4 space-y-5 text-gray-300 border rounded-lg">
+                <h3 className="text-xl font-bold">Property Description</h3>
+                <p className="text-sm">{selected.description} </p>
+              </div>
+            </div>
+          </div>
         </>
       )}
     </>
