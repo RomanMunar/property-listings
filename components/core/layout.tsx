@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react"
-import { Navbar } from "./core"
+import { Navbar } from "."
 
 interface Props {
   children: ReactNode
