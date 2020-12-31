@@ -1,6 +1,5 @@
 import React, { useState } from "react"
-import { disableBodyScroll } from "../../lib/utils/disableScroll"
-import { enableBodyScroll } from "../../lib/utils/enableScroll"
+import { disableScroll, enableScroll } from "../../lib/utils"
 import { Logo, Menu } from "../icons"
 
 interface Props {}
@@ -21,7 +20,7 @@ const navbar = (props: Props) => {
           <button
             onClick={() => {
               setIsOverlayOpen(true)
-              disableBodyScroll()
+              disableScroll()
             }}
           >
             <Menu className="w-6 h-6 text-white" />
@@ -33,7 +32,7 @@ const navbar = (props: Props) => {
           <button
             onClick={() => {
               setIsOverlayOpen(false)
-              enableBodyScroll()
+              enableScroll()
             }}
             className="fixed inset-0 z-40 w-full h-full bg-gray-500 bg-opacity-30 sm:block"
           />
