@@ -1,4 +1,4 @@
 export { default as Head } from "./head"
 export { default as Navbar } from "./navbar"
-export { default as PropertyGrid } from "./propertyGrid"
-export { default as PropertyCard } from "./propertyCard"
+export { default as Footer } from "./footer"
+export { default as Layout } from "./layout"
