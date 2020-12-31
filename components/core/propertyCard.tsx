@@ -10,13 +10,14 @@ interface Props {
 
 const propertyCard = ({ property, onPropertyClick, selected }: Props) => {
   return (
-    <button onClick={() => onPropertyClick(property)} className="cursor-pointer focus:outline-none">
-      <div
-        className={clsx(
-          "flex flex-col border-t text-left items-start px-5 py-3 ",
-          selected && "border-amber-500  border-b bg-gray-700"
-        )}
-      >
+    <button
+      onClick={() => onPropertyClick(property)}
+      className={clsx(
+        "cursor-pointer focus:outline-none flex flex-col text-left items-start px-5 py-3 border-b border-t",
+        selected && "border-amber-500 bg-gray-700"
+      )}
+    >
+      <div className="flex flex-col items-start px-5 py-3 text-left">
         <h3 className="text-lg font-semibold text-gray-100">{property.title}</h3>
         <p className="text-xs text-gray-100">{property.location}</p>
         <div>
