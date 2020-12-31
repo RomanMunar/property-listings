@@ -1,12 +1,30 @@
+import Image from "next/image"
+import { PropertyGrid } from "../components/core"
 import { Layout } from "../components"
+import { API_URL } from "../lib/api"
+import { useEffect, useState } from "react"
+import { Property } from "../@types"
+
 const Home = () => {
+  const [properties, setProperties] = useState<Property[]>([])
+
+  useEffect(() => {
+    const fetchProperties = async () =>
+      await fetch(`${API_URL}/properties?_limit=10`)
+        .then((res) => res.json())
+        .then((data) => {
+          setProperties(data)
+        })
+
+    fetchProperties()
+  }, [])
+
   return (
     <div className="w-full font-serif min-h-page">
       <div className="relative">
-        <div
-          style={{ backgroundImage: 'url("/homepace_image.jpg")' }}
-          className="w-full bg-center bg-no-repeat bg-cover h-52"
-        ></div>
+        <div className="w-full h-52">
+          <Image src="/homepace_image.jpg" layout="fill" />
+        </div>
         <div className="absolute top-0 w-full h-full bg-gray-700 bg-opacity-50"></div>
         <div className="absolute z-10 px-10 text-white top-1/4">
           <span className="block text-3xl font-bold text-amber-500">John Hitchkins</span>
@@ -44,24 +62,20 @@ const Home = () => {
         </div>
       </div>
       <div className="relative bg-gray-800">
-        <div
-          style={{ backgroundImage: 'url("/team-collab.jpg")' }}
-          className="w-full bg-center bg-no-repeat bg-cover h-44"
-        >
-          <div className="absolute top-0 w-full h-full bg-gray-700 bg-opacity-50"></div>
+        <div className="w-full h-44">
+          <Image src="/team_collab.jpg" layout="fill" />
         </div>
+        <div className="absolute top-0 w-full h-full bg-gray-700 bg-opacity-50"></div>
         <div className="absolute z-10 px-10 top-1/4">
           <h3 className="text-2xl font-semibold text-center text-amber-500">Unparalleled Service.</h3>
           <br /> <p className="text-center text-gray-100">Expert advice at every step of the Transcation.</p>
         </div>
       </div>
       <div className="relative bg-gray-800">
-        <div
-          style={{ backgroundImage: 'url("/neighborhoods.jpg")' }}
-          className="w-full h-64 bg-center bg-no-repeat bg-cover"
-        >
-          <div className="absolute top-0 w-full h-full bg-gray-700 bg-opacity-50"></div>
+        <div className="w-full h-64">
+          <Image src="/neighborhoods.jpg" layout="fill" />
         </div>
+        <div className="absolute top-0 w-full h-full bg-gray-700 bg-opacity-50"></div>
         <div className="absolute z-10 px-10 top-12">
           <h3 className="text-2xl font-semibold text-center text-amber-500">Explore Neighborhoods.</h3>
           <br />
@@ -72,12 +86,10 @@ const Home = () => {
         </div>
       </div>
       <div className="relative bg-gray-800">
-        <div
-          style={{ backgroundImage: 'url("/conciergie.jpg")' }}
-          className="w-full h-64 bg-center bg-no-repeat bg-cover"
-        >
-          <div className="absolute top-0 w-full h-full bg-gray-700 bg-opacity-50"></div>
+        <div className="w-full h-64">
+          <Image src="/conciergie.jpg" layout="fill" />
         </div>
+        <div className="absolute top-0 w-full h-full bg-gray-700 bg-opacity-50"></div>
         <div className="absolute z-10 px-10 top-1/4">
           <h3 className="text-2xl font-semibold text-center text-amber-500">Visit Our Concierge Services.</h3>
           <br />
@@ -87,8 +99,10 @@ const Home = () => {
           </p>
         </div>
       </div>
+      <PropertyGrid properties={properties} />
     </div>
   )
 }
+
 Home.Layout = Layout
 export default Home
