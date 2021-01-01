@@ -33,13 +33,13 @@ const propertySlider = ({ images }: { images: string[] }) => {
         </div>
       )}
       <div id="images">
-        <div ref={sliderRef} className="block overflow-hidden bg-gray-400 rounded-md keen-slider max-w-100">
+        <div ref={sliderRef} className="block overflow-hidden bg-gray-400 md:rounded-md keen-slider max-w-100">
           {images.map((img) => (
             <img className="keen-slider__slide h-52 sm:h-56 w-100 md:h-96" src={`/${img}.jpg`} alt={img} />
           ))}
         </div>
       </div>
-      <div className="absolute flex items-center justify-center w-full space-x-2 bottom-10" id="dots">
+      <div className="absolute flex items-center justify-center w-full space-x-2 bottom-3 sm:5" id="dots">
         {images?.length > 1 &&
           images.map((i, idx) => (
             <button
