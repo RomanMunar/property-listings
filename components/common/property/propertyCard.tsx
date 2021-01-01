@@ -1,5 +1,6 @@
 import { Property } from "../../../@types"
 import clsx from "clsx"
+import { Bed, Car, Check, Leaf, Paw, Shower } from "../../icons"
 
 interface Props {
   property: Property
@@ -10,19 +11,40 @@ interface Props {
 const propertyCard = ({ property, onPropertyClick, selected }: Props) => {
   return (
     <button
+      key={`product-${property.id}`}
       onClick={() => onPropertyClick(property)}
-      className={clsx(
-        "cursor-pointer focus:outline-none flex flex-col text-left items-start px-5 py-3 border-b border-t",
-        selected && "border-amber-500 bg-gray-700"
-      )}
+      className={clsx("cursor-pointer focus:outline-none flex flex-col text-left items-start border-b")}
     >
-      <div className="flex flex-col items-start px-2 py-3 text-left sm:px-5">
+      <div
+        className={clsx(
+          "flex flex-col items-start px-6 py-5 text-left border-l-4 border-transparent",
+          selected && "border-amber-500 bg-gray-700"
+        )}
+      >
         <h3 className="text-lg font-semibold text-gray-100">{property.title}</h3>
         <p className="text-xs text-gray-100">{property.location}</p>
-        <div>
-          <span className="text-sm font-semibold tracking-wide text-gray-100 track">{property.bathrooms_count} •</span>
-          <span className="p-2 text-sm font-bold text-gray-100"> {property.bedrooms_count} • </span>
-          <span className="px-2 py-1 text-xs bg-gray-200 rounded-full">{property.garages_count}</span>
+        <div className="space-x-2 text-gray-200">
+          <span>
+            {property.bathrooms_count} <Shower className="inline w-4 h-4" />
+          </span>
+          <span>
+            • {property.bedrooms_count} <Bed className="inline w-4 h-4" />
+          </span>
+          <span>
+            • {property.garages_count} <Car className="inline w-4 h-4" />
+          </span>
+          {property.has_garden && (
+            <span>
+              • <Check className="inline w-3 h-3 -mr-1" />
+              <Leaf className="inline w-4 h-4 transform -rotate-3" />
+            </span>
+          )}
+          {property.pets_allowed && (
+            <span>
+              • <Check className="inline w-3 h-3 transform -rotate-3" />
+              <Paw className="inline w-4 h-4" />
+            </span>
+          )}
         </div>
         <p
           style={{ display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical" }}
