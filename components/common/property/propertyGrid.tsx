@@ -1,4 +1,4 @@
-import { disableScroll, enableScroll } from "../../../lib/utils"
+import { disableScroll, enableScroll, useMedia } from "../../../lib/utils"
 import { useState, useEffect } from "react"
 import { PropertySlider, PropertyCard } from "."
 import { Property } from "../../../@types"
@@ -9,23 +9,24 @@ interface Props {
 
 const propertyGrid = ({ properties }: Props) => {
   const [selected, setSelected] = useState<Property | null>(null)
-  const [isOverlayOpen, setIsOverlayOpen] = useState(false)
-
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const isMobile = useMedia("(max-width: 768px)")
   const onPropertyClick = (property: Property) => {
     setSelected(property)
-    setIsOverlayOpen(true)
-    disableScroll()
+    setIsDrawerOpen(true)
+    if (isMobile) disableScroll()
   }
   useEffect(() => {
-    setSelected(properties[0])
-    disableScroll()
-    setIsOverlayOpen(true)
+    if (!isMobile) {
+      setSelected(properties[0])
+      setIsDrawerOpen(true)
+    }
   }, [properties])
 
   return (
     <>
       <div className="flex w-full max-w-6xl mx-auto">
-        <div className="max-w-lg mx-auto overflow-auto border-t border-l max-h-90vh">
+        <div className="max-w-lg mx-auto overflow-auto border-t md:border lg:border-r-0 max-h-90vh">
           <div className="flex flex-col my-2">
             <h3 className="mx-4 font-thin text-white">Search results for "Properties near St. Peter"</h3>
             <div className="relative w-11/12 mx-auto mr-4">
@@ -54,15 +55,18 @@ const propertyGrid = ({ properties }: Props) => {
               </span>
             </div>
           </div>
-          <div>
+          <div className="border-t">
             {properties.map((p) => (
               <PropertyCard onPropertyClick={onPropertyClick} selected={selected?.id === p.id} property={p} />
             ))}
           </div>
         </div>
-        <div className="hidden w-full p-5 overflow-auto text-white bg-gray-800 border border-amber-500 sm:block max-h-90vh">
+        <div className="hidden w-full p-5 overflow-auto text-white bg-gray-800 border border-amber-500 lg:block max-h-90vh">
           {selected && (
             <div className="px-4 py-2">
+              <div className="my-2">
+                <PropertySlider images={["1", "2", "3", "4", "5"]} />
+              </div>
               <h3 className="mb-4 text-2xl font-bold text-amber-500">{selected.title}</h3>
               <div className="p-4 space-y-5 border rounded-lg">
                 <h3 className="text-xl font-bold">Property Description</h3>
@@ -281,34 +285,34 @@ const propertyGrid = ({ properties }: Props) => {
           )}
         </div>
       </div>
-      {isOverlayOpen && (
+      {isDrawerOpen && isMobile && (
         <button
           onClick={() => {
-            setIsOverlayOpen(false)
+            setIsDrawerOpen(false)
             setSelected(null)
             enableScroll()
           }}
-          className="fixed bottom-0 z-40 w-full h-full bg-gray-500 bg-opacity-30 sm:block"
+          className="fixed bottom-0 z-40 w-full h-full bg-gray-900 bg-opacity-70 sm:block"
         />
       )}
-      {selected && (
-        <div className="fixed bottom-0 z-50 w-full overflow-y-scroll h-3/4">
-          <div className="px-4 py-10 bg-gray-800 rounded-tl-2xl rounded-tr-2xl">
-            <div>
-              <PropertySlider images={["1", "2", "3", "4", "5"]} />
-            </div>
-            <h3 className="mb-4 text-2xl font-bold text-amber-500">{selected.title}</h3>
-            <div className="p-4 space-y-5 text-gray-300 border rounded-lg">
-              <h3 className="text-xl font-bold">Property Description</h3>
-              <p className="text-sm">{selected.description} </p>
-            </div>
-            <div className="p-4 space-y-5 text-gray-300 border rounded-lg">
-              <h3 className="text-xl font-bold">Property Description</h3>
-              <p className="text-sm">{selected.description} </p>
-            </div>
-            <div className="p-4 space-y-5 text-gray-300 border rounded-lg">
-              <h3 className="text-xl font-bold">Property Description</h3>
-              <p className="text-sm">{selected.description} </p>
+      {selected && isMobile && (
+        <div className="fixed bottom-0 z-50 w-full p-2 overflow-y-scroll h-3/4 ">
+          <div className="max-w-xl mx-auto bg-gray-800 rounded-3xl">
+            <PropertySlider images={["1", "2", "3", "4", "5"]} />
+            <div className="px-4">
+              <h3 className="mb-4 text-2xl font-bold text-amber-500">{selected.title}</h3>
+              <div className="p-4 space-y-5 text-gray-300 border rounded-lg">
+                <h3 className="text-xl font-bold">Property Description</h3>
+                <p className="text-sm">{selected.description} </p>
+              </div>
+              <div className="p-4 space-y-5 text-gray-300 border rounded-lg">
+                <h3 className="text-xl font-bold">Property Description</h3>
+                <p className="text-sm">{selected.description} </p>
+              </div>
+              <div className="p-4 space-y-5 text-gray-300 border rounded-lg">
+                <h3 className="text-xl font-bold">Property Description</h3>
+                <p className="text-sm">{selected.description} </p>
+              </div>
             </div>
           </div>
         </div>
