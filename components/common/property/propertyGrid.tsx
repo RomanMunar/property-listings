@@ -2,6 +2,7 @@ import { disableScroll, enableScroll, useMedia } from "../../../lib/utils"
 import { useState, useEffect } from "react"
 import { PropertySlider, PropertyCard } from "."
 import { Property } from "../../../@types"
+import { Car, Shower, Bed, Leaf, Paw } from "../../icons"
 
 interface Props {
   properties: Property[]
@@ -26,7 +27,7 @@ const propertyGrid = ({ properties }: Props) => {
   return (
     <>
       <div className="flex w-full max-w-6xl mx-auto">
-        <div className="max-w-lg mx-auto overflow-auto border-t md:border lg:border-r-0 max-h-90vh">
+        <div className="max-w-lg mx-auto overflow-auto border-t border-l lg:border-r-0 max-h-90vh">
           <div className="flex flex-col my-2">
             <h3 className="mx-4 font-thin text-white">Search results for "Properties near St. Peter"</h3>
             <div className="relative w-11/12 mx-auto mr-4">
@@ -71,178 +72,61 @@ const propertyGrid = ({ properties }: Props) => {
               <div className="p-4 space-y-5 border rounded-lg">
                 <h3 className="text-xl font-bold">Property Description</h3>
                 <p className="text-sm">{selected.description} </p>
-                <span className="size">
-                  <span className="px-2 text-sm font-medium text-gray-100 bg-gray-200 rounded-full">
-                    Day Shift Only
-                  </span>
-                </span>
               </div>
               <br />
               <div className="p-4 border rounded-lg">
-                <div className="space-y-5">
-                  <h3 className="text-lg">Requirements</h3>
-                  <ul>
-                    <li>
-                      <span className="text-sm ">• Experience in ReactJS Development</span>
-                    </li>
+                <h3 className="text-lg">Property Preview</h3>
+                <ul>
+                  <li>
+                    <span className="text-sm ">• {selected.floor_area}sqm floor area</span>
+                  </li>
 
-                    <li>
-                      <span className="text-sm ">• Knowledge in Full Stack Development</span>
-                    </li>
+                  <li>
+                    <span className="text-sm ">• {selected.lot_area}sqm lot area</span>
+                  </li>
 
-                    <li>
-                      <span className="text-sm ">• Extensive experience in HTML and CSS</span>
-                    </li>
-                    <li>
-                      <span className="text-sm ">• AN Opinionated and specific way to code</span>
-                    </li>
-                  </ul>
-                  <div>
-                    <div>
-                      <span className="font">
-                        <span className="text-lg">Desirable</span>
-                      </span>
-                    </div>
-                    <ul>
-                      <li>
-                        <span className="font">
-                          <span className="text-sm ">• Experience in any eCommerce platform</span>
-                        </span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div>
-                    <div>
-                      <span className="highlight">
-                        <span className="colour">
-                          <span className="highlight">
-                            <span className="colour">
-                              <span className="font">
-                                <span className="text-lg ">Traits we're looking for in you:</span>
-                              </span>
-                            </span>
-                          </span>
-                        </span>
-                      </span>
-                    </div>
-                    <ul>
-                      <li>
-                        <span className="font">
-                          <span className="text-sm ">
-                            • A quick learner&nbsp;- in a face-paced area of JavaScript&nbsp;frameworks, your ability to
-                            take on the latest changes and understanding is key
-                          </span>
-                        </span>
-                      </li>
-
-                      <li>
-                        <span className="font">
-                          <span className="text-sm ">• Takes ownership and responsibility for complete work</span>
-                        </span>
-                      </li>
-
-                      <li>
-                        <span className="font">
-                          <span className="text-sm ">• Exceptional attention to detail</span>
-                        </span>
-                      </li>
-                      <li>
-                        <span className="font">
-                          <span className="text-sm ">• A problem solver</span>
-                        </span>
-                      </li>
-                      <li>
-                        <span className="font">
-                          <span className="text-sm ">• Strong lateral thinker</span>
-                        </span>
-                      </li>
-                      <li>
-                        <span className="highlight">
-                          <span className="font">
-                            <span className="text-sm ">
-                              • Ability to communicate ideas to the team and know the steps to achieve them
-                            </span>
-                          </span>
-                        </span>
-                      </li>
-
-                      <li>
-                        <span className="font">
-                          <span className="text-sm ">• Understanding of "why" not just "what" you do</span>
-                        </span>
-                      </li>
-                      <li>
-                        <span className="font">
-                          <span className="text-sm ">• Has the "I can't let this fail" attitude</span>
-                        </span>
-                      </li>
-                      <li>
-                        <span className="font">
-                          <span className="text-sm ">• Ability to work in a fast-paced environment</span>
-                        </span>
-                      </li>
-                      <li>
-                        <span className="font">
-                          <span className="text-sm ">
-                            • Real team player - looking out for others and achieving together
-                          </span>
-                        </span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+                  <li>
+                    <span className="text-sm ">• {selected.location}</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="grid grid-cols-2 gap-2 p-4 border rounded-lg">
+                <span>
+                  <Shower className="inline w-4 h-4" /> {selected.bathrooms_count} Bathrooms
+                </span>
+                <span>
+                  <Bed className="inline w-4 h-4" /> {selected.bedrooms_count} Bedrooms
+                </span>
+                <span>
+                  <Car className="inline w-4 h-4" /> {selected.garages_count} Garages
+                </span>
+                {selected.has_garden && (
+                  <span>
+                    <Leaf className="inline w-4 h-4 transform -rotate-3" /> Garden
+                  </span>
+                )}
+                {selected.pets_allowed && (
+                  <span>
+                    <Paw className="inline w-4 h-4" /> Pets
+                  </span>
+                )}
               </div>
               <div className="p-4 border rounded-lg">
                 <h3 className="text-lg ">Benefits</h3>
                 <div>
-                  <span className="highlight">
-                    <span className="colour">
-                      <span className="colour">
-                        <span className="highlight">
-                          <span className="colour">
-                            <span className="size">
-                              <span className="text-sm ">
-                                • On top of being a really cool company and a great place to work, you’ll get the
-                                following benefits as part of the Filta Family
-                              </span>
-                            </span>
-                          </span>
-                        </span>
-                      </span>
-                    </span>
+                  <span className="text-sm ">
+                    • On top of being a really cool company and a great place to work, you’ll get the following benefits
+                    as part of the Filta Family
                   </span>
                 </div>
                 <ul>
                   <li>
-                    <span className="highlight">
-                      <span className="colour">
-                        <span className="colour">
-                          <span className="size">
-                            <span className="text-sm ">• 6:00am to 3:00pm Monday to Friday shift</span>
-                          </span>
-                        </span>
-                      </span>
-                    </span>
-                    <br />
+                    <span className="text-sm ">• 6:00am to 3:00pm Monday to Friday shift</span>
                   </li>
+                  <br />
 
                   <li>
-                    <span className="highlight">
-                      <span className="colour">
-                        <span className="colour">
-                          <span className="size">
-                            <span className="text-sm ">
-                              • HMO for yourself and one dependent within the first month
-                            </span>
-                          </span>
-                        </span>
-                      </span>
-                    </span>
-                    <span className="size">
-                      <span className="font">
-                        <br />
-                      </span>
-                    </span>
+                    <span className="text-sm ">• HMO for yourself and one dependent within the first month</span>
                   </li>
                   <li>
                     <span className="text-sm ">
@@ -264,19 +148,11 @@ const propertyGrid = ({ properties }: Props) => {
                     </span>
                   </li>
                   <li>
-                    <span className="size">
-                      <span className="text-sm ">• The opportunity to be a part of&nbsp;</span>
-                    </span>
-                    <span className="colour">
-                      <span className="size">
-                        <span className="font">Shopify Meetup Manila</span>
-                      </span>
-                    </span>
-                    <span className="size">
-                      <span className="font">
-                        &nbsp;run by Filta every quarter.&nbsp; This event will expose you to the Shopify – the world's
-                        fastest growing eCommerce platform – and the ecosystem in Manila.
-                      </span>
+                    <span className="text-sm ">• The opportunity to be a part of&nbsp;</span>
+                    <span className="font">Shopify Meetup Manila</span>
+                    <span className="font">
+                      &nbsp;run by Filta every quarter.&nbsp; This event will expose you to the Shopify – the world's
+                      fastest growing eCommerce platform – and the ecosystem in Manila.
                     </span>
                   </li>
                 </ul>
@@ -297,7 +173,7 @@ const propertyGrid = ({ properties }: Props) => {
       )}
       {selected && isMobile && (
         <div className="fixed bottom-0 z-50 w-full p-2 overflow-y-scroll h-3/4 ">
-          <div className="max-w-xl mx-auto bg-gray-800 rounded-3xl">
+          <div className="max-w-xl mx-auto overflow-hidden bg-gray-800 rounded-3xl">
             <PropertySlider images={["1", "2", "3", "4", "5"]} />
             <div className="px-4">
               <h3 className="mb-4 text-2xl font-bold text-amber-500">{selected.title}</h3>
