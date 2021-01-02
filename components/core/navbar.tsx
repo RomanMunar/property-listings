@@ -1,27 +1,31 @@
-import React, { useState } from "react"
+import { useRouter } from "next/dist/client/router"
+import { useState } from "react"
+import { NavItem } from "."
 import { disableScroll, enableScroll } from "../../lib/utils"
+import { LogoFull } from "../common"
 import { Logo, Menu } from "../icons"
 
 interface Props {}
 
+const navbarRoutes = [
+  { route: "Home", dest: "/" },
+  { route: "Listings", dest: "/listings" },
+  { route: "Testimonials", dest: "/testimonials" },
+  { route: "Contact", dest: "/contact" },
+]
+
 const navbar = (props: Props) => {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false)
+  const { asPath } = useRouter()
   return (
     <>
-      <nav className="sticky top-0 z-20 flex items-center justify-between px-3 py-2 font-serif bg-gray-800 border-b-2 md:px-10 md:p-5 border-amber-500">
-        <div className="flex items-center">
-          <Logo className="w-8 h-8 text-white md:w-10 md:h-10" />
-          <span className="font-bold">
-            <span className="text-2xl text-amber-500 text-md md:text-4xl">H</span>
-            <span className="text-sm text-gray-200 md:text-2xl ">itchkins</span>
-          </span>
-        </div>
+      <nav className="z-20 flex items-center justify-between px-3 py-2 font-serif bg-gray-800 border-b-2  md:px-10 md:py-5 border-amber-500">
+        <LogoFull size="sm" />
         <div className="hidden md:block">
-          <ul className="flex items-center text-white md:text-xl">
-            <li className="px-4 py-1 font-bold border-b-2 border-amber-500">Home</li>
-            <li className="px-4 py-1 border-b-2 border-transparent">Listings</li>
-            <li className="px-4 py-1 border-b-2 border-transparent">Testimonials</li>
-            <li className="px-4 py-1 border-b-2 border-transparent text-amber-500">Contact Us</li>
+          <ul className="flex items-center space-x-4 text-white divide-x divide-gray-700 md:text-xl">
+            {navbarRoutes.map((n) => (
+              <NavItem active={asPath === n.dest} key={`route-${n.route}`} route={n.route} dest={n.dest} />
+            ))}
           </ul>
         </div>
         <div className="inline-flex h-full sm:hidden">
