@@ -2,6 +2,7 @@ import cx from "clsx"
 import { useKeenSlider } from "keen-slider/react"
 import { useState } from "react"
 import { Chevron } from "../../icons"
+import Image from "next/image"
 import "keen-slider/keen-slider.min.css"
 
 const propertySlider = ({ images }: { images: string[] }) => {
@@ -35,7 +36,9 @@ const propertySlider = ({ images }: { images: string[] }) => {
       <div id="images">
         <div ref={sliderRef} className="block overflow-hidden bg-gray-400 md:rounded-md keen-slider max-w-100">
           {images.map((img) => (
-            <img className="keen-slider__slide h-52 sm:h-56 w-100 md:h-96" src={`/${img}.jpg`} alt={img} />
+            <div className="keen-slider__slide h-52 sm:h-56 w-100 md:h-96">
+              <Image layout="fill" src={`/${img}.jpg`} alt={img} />
+            </div>
           ))}
         </div>
       </div>
