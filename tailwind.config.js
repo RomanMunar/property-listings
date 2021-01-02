@@ -1,4 +1,3 @@
-const defaultTheme = require("tailwindcss/defaultTheme")
 const colors = require("tailwindcss/colors")
 
 module.exports = {
@@ -9,9 +8,6 @@ module.exports = {
       colors: {
         amber: colors.amber,
         gray: colors.warmGray,
-      },
-      fontFamily: {
-        sans: ["Inter", ...defaultTheme.fontFamily.sans],
       },
       zIndex: {
         1: "1",
