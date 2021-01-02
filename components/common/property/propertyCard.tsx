@@ -18,7 +18,7 @@ const propertyCard = ({ property, onPropertyClick, selected }: Props) => {
       <div
         className={clsx(
           "flex flex-col items-start px-6 py-5 text-left border-l-4 border-transparent",
-          selected && "border-amber-500 bg-gray-700"
+          selected && "border-amber-500 bg-gray-800"
         )}
       >
         <h3 className="text-lg font-semibold text-gray-100">{property.title}</h3>
