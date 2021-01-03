@@ -1,5 +1,5 @@
-import { Property } from "../../../@types"
 import clsx from "clsx"
+import { Property } from "../../../@types"
 import { Bed, Car, Check, Leaf, Paw, Shower } from "../../icons"
 
 interface Props {
@@ -11,13 +11,12 @@ interface Props {
 const propertyCard = ({ property, onPropertyClick, selected }: Props) => {
   return (
     <button
-      key={`product-${property.id}`}
       onClick={() => onPropertyClick(property)}
-      className={clsx("cursor-pointer focus:outline-none flex flex-col text-left items-start border-b")}
+      className="flex flex-col items-start text-left border-b cursor-pointer focus:outline-none"
     >
       <div
         className={clsx(
-          "flex flex-col items-start px-6 py-5 text-left border-l-4 border-transparent",
+          "flex flex-col items-start px-6 py-5 text-left border-l-4 border-transparent bg-gray-900",
           selected && "border-amber-500 bg-gray-800"
         )}
       >
