@@ -1,5 +1,4 @@
 import { LogoFull } from "../common"
-import { Logo } from "../icons"
 
 const footer = () => (
   <footer className="font-serif text-gray-100 bg-gray-900 border-t-4 border-gray-700 md:text-lg">

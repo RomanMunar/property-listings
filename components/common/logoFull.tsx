@@ -1,5 +1,5 @@
-import { Logo } from "../icons"
 import clsx from "clsx"
+import { Logo } from "../icons"
 
 interface Props {
   size: "sm" | "md" | "lg"
