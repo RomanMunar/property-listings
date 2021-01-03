@@ -3,9 +3,7 @@ import { useState } from "react"
 import { NavItem } from "."
 import { disableScroll, enableScroll } from "../../lib/utils"
 import { LogoFull } from "../common"
-import { Logo, Menu } from "../icons"
-
-interface Props {}
+import { Menu } from "../icons"
 
 const navbarRoutes = [
   { route: "Home", dest: "/" },
@@ -14,12 +12,12 @@ const navbarRoutes = [
   { route: "Contact", dest: "/contact" },
 ]
 
-const navbar = (props: Props) => {
+const navbar = () => {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false)
   const { asPath } = useRouter()
   return (
     <>
-      <nav className="z-20 flex items-center justify-between px-3 py-2 font-serif bg-gray-800 border-b-2  md:px-10 md:py-5 border-amber-500">
+      <nav className="z-20 flex items-center justify-between px-3 py-2 font-serif bg-gray-800 border-b-2 md:px-10 md:py-4 border-amber-500">
         <LogoFull size="sm" />
         <div className="hidden md:block">
           <ul className="flex items-center space-x-4 text-white divide-x divide-gray-700 md:text-xl">
