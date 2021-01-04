@@ -1,14 +1,21 @@
 import Image from "next/image"
 import { PropertyGrid } from "../components/common/property"
 import { Layout } from "../components/core"
+import mockProperties from "../lib/mockProperties.json"
 import { API_URL } from "../lib/api"
 import { Property } from "../@types"
 import { InferGetStaticPropsType } from "next"
 
 export async function getStaticProps() {
-  const fetchProperties = async () =>
-    (await fetch(`${API_URL}/properties?_limit=42`).then((res) => res.json())) as Property[]
-  const properties = await fetchProperties()
+  let properties
+  if (process.env.NODE_ENV === "development") {
+    const fetchProperties = async () =>
+      (await fetch(`${API_URL}/properties?_limit=42`).then((res) => res.json())) as Property[]
+    properties = await fetchProperties()
+  } else {
+    properties = mockProperties
+  }
+
   return {
     props: { properties },
   }
